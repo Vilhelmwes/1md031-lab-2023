@@ -1,0 +1,69 @@
+/* För att kommentera kod */
+
+@import 'https://fonts.googleapis.com/css?family=Pacifico|Dosis';
+
+body {
+    font-family: arial, sans-serif;
+    font-size: 1em;
+ }
+
+ #Burger-selection {
+    background-color: black;
+    color: white;
+    padding: 20px;
+ }
+ 
+ button {
+    background-color: rgba(0,0,0,0);
+    border:0;
+ 
+}
+button[type=submit]:hover{
+    background-color:darkgray;
+    cursor:pointer;
+}
+
+section[id=Burger-selection]{
+    margin:30px;
+    border: 2px dotted;
+    border-color: white;
+}
+
+#Burgerlist{
+    display:grid;
+    grid-template-columns: repeat(auto-fill,20em);
+    gap:2em;
+}
+
+section[id=Customer-Information]{
+    margin:2em;
+    border: 2px dotted;
+    border-color: black;
+    padding:2em;
+}
+
+div{
+    margin:2em;
+    padding: 2em;
+    
+}
+.Bilder{
+    width:300px;
+    height:200px;
+}
+
+.allergy{
+    font-weight: bold;
+}
+
+header {
+    background-image: url("img/header-image.jpeg");
+    height:7em;
+    background-size: cover;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    margin:2em;
+    padding-top:1em;
+    font-size:1.5em;
+    text-align: center;
+}
