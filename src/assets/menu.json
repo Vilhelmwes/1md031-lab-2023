@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Burger 1",
+      "kCal": 300,
+      "lactose": true,
+      "gluten": true,
+      "img": "img/burgare.jpeg"
+    },{
+        "name": "Burger 2",
+        "kCal": 400,
+        "lactose": false,
+        "gluten": false,
+        "img": "img/burgare2.jpeg"
+      },{
+        "name": "Burger 3",
+        "kCal": 500,
+        "lactose": true,
+        "gluten": false,
+        "img": "img/burgare3.jpeg"
+      }
+  ]

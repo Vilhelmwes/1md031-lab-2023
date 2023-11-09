@@ -1,161 +1,105 @@
 <template>
   <header>
-        <h1>Hello and Welcome to Vilhelms baltburgare</h1>
+    <h1>Hello and Welcome to Vilhelms baltburgare</h1>
 
-    </header>
+  </header>
 
-    <main>
-        <section id="Burger-selection">
-            <h2>Select Your Burger</h2>
-            <p>Choose from a large variety of tasty burgers, sides and drinks to fill your stomach and quench your
-                thirst.<br>Psst, don't forget to order for a friend!</p>
-
-            <div id="Burgerlist">
-
-                <article>
-                    <h3>The BaltBurger</h3>
-                    <img class="Bilder" src="img/burgare.jpeg">
-
-
-                    <div id="BaltBurger-information">
-                        <h4>Information</h4>
-                        <ol>
-                            <li>Choose toppings</li>
-                            <li>Choose side</li>
-                            <li>Choose drink</li>
-                        </ol>
-
-                        <ul>
-                            <li><span class="allergy"> Gluten-free</span></li>
-                            <li> 100% <span class="allergy"> Swedish Ingredients</span></li>
-                            <li> May contain<span class="allergy"> nuts</span></li>
-                            <dd>...ask the staff if you're unsure</dd>
-                        </ul>
-
-                    </div>
-                </article>
-
-                <article>
-                    <h3>The BaltBurger's Brother</h3>
-                    <img class="Bilder" src="img/burgare2.jpeg">
-
-
-                    <div id="BaltBurgers-brother-information">
-                        <h4>Information</h4>
-                        <ol>
-                            <li>Choose toppings</li>
-                            <li>Choose side</li>
-                            <li>Choose drink</li>
-                        </ol>
-
-                        <ul>
-                            <li>100% <span class="allergy">Swedish Ingredients</span></li>
-                            <li><span class="allergy">Free</span> toy included!</li>
-                        </ul>
-
-                    </div>
-                </article>
+  <main>
+    <section id="Burger-selection">
+      <h2>Select Your Burger</h2>
+      <p>Choose from a large variety of tasty burgers, sides and drinks to fill your stomach and quench your
+        thirst.<br>Psst, don't forget to order for a friend!</p>
 
 
 
-                <article>
-                    <h3>The MotherBurger</h3>
-                    <img class="Bilder" src="img/burgare3.jpeg">
+      <div id="Burgerlist">
+
+        <Burger v-for="burger in burgers" v-bind:burger="burger" v-bind:key="burger.name" />
+      </div>
+    </section>
 
 
-                    <div id="MotherBurger-information">
-                        <h4>Information</h4>
-                        <ol>
-                            <li>Choose toppings</li>
-                            <li>Choose side</li>
-                            <li>Choose drink</li>
-                        </ol>
-
-                        <ul>
-                            <li><span class="allergy">Homemade</span> sesame-bun</li>
-                            <li><span class="allergy">Free</span> dip to your side!</li>
-                        </ul>
-
-                    </div>
-                </article>
-            </div>
-        </section>
+    <section id="Customer-Information">
+      <h2>Customer information</h2>
+      <p> Provide your delivery address and other necessary details for your order below:</p>
 
 
-        <section id="Customer-Information">
-            <h2>Customer information</h2>
-            <p> Provide your delivery address and other necessary details for your order below:</p>
+      <section id="contact">
+        <form>
+          <p>
+            <label for="fullname">Full name</label><br>
+            <input type="text" id="fullname" v-model="fn" required="required" placeholder="First & Last Name">
+          </p>
+          <p>
+            <label for="email">Email</label><br>
+            <input type="text" id="email" v-model="em" required="required" placeholder="E-mail address">
+          </p>
+          <p>
+            <label for="street">Street</label><br>
+            <input type="text" id="street" v-model="st" required="required" placeholder="Street name">
+          </p>
+          <p>
+            <label for="house">House</label><br>
+            <input type="text" id="house" v-model="ho" required="required" placeholder="House number">
+          </p>
 
+          <p>
+            <label for="payment-method">Payment method</label><br>
+            <select select="select" v-model="slc">
+              <option selected="selected">Card</option>
+              <option>Swish</option>
+              <option>Invoice</option>
+              <option>Cash at delivery</option>
+            </select>
+          </p>
 
-            <section id="contact">
-                <form>
-                    <p>
-                        <label for="fullname">Full name</label><br>
-                        <input type="text" id="fullname" name="fn" required="required" placeholder="First & Last Name">
-                    </p>
-                    <p>
-                        <label for="email">Email</label><br>
-                        <input type="text" id="email" name="em" required="required" placeholder="E-mail address">
-                    </p>
-                    <p>
-                        <label for="street">Street</label><br>
-                        <input type="text" id="street" name="st" required="required" placeholder="Street name">
-                    </p>
-                    <p>
-                        <label for="house">House</label><br>
-                        <input type="text" id="house" name="ho" required="required" placeholder="House number">
-                    </p>
+          <label for="gender">Gender</label><br>
+          <label>
+            <input type="radio" v-model="gender" value="male"> Male
+          </label>
 
-                    <p>
-                        <label for="payment-method">Payment method</label><br>
-                        <select select="select" name="slc">
-                            <option selected="selected">Card</option>
-                            <option>Swish</option>
-                            <option>Invoice</option>
-                            <option>Cash at delivery</option>
-                        </select>
-                    </p>
+          <label>
+            <input type="radio" v-model="gender" value="female" checked> Female
+          </label>
 
-                    <label for="gender">Gender</label><br>
-                    <label>
-                        <input type="radio" name="gender" value="male"> Male
-                    </label>
+          <label>
+            <input type="radio" v-model="gender" value="not_specified"> Do not wish to provide
+          </label>
+        </form>
+      </section>
+    </section>
+   <!-- <button name="order-now" type="submit" v-on:click="addOrder">
+      <img src="img/ordernow4.png" width="150" height="100">
 
-                    <label>
-                        <input type="radio" name="gender" value="female" checked> Female
-                    </label>
+    </button>*/ -->
 
-                    <label>
-                        <input type="radio" name="gender" value="not_specified"> Do not wish to provide
-                    </label>
-                </form>
-            </section>
-        </section>
-        <button type="submit">
-            <img src="img/ordernow4.png" width="150" height="100">
-        </button>
-        <br><br>
+    <button name="data-form" type="submit" v-on:click="markDone">
+      <img src="img/ordernow4.png" width="150" height="100">
 
-    </main>
+    </button>
+    <br><br>
 
-    <hr>
+  </main>
 
-    <footer>
-        <section id="Copyrights-And-Contact-Info">
-            <h2>Contact info</h2>
-            <p>To be announced...</p>
-        </section>
-        &COPY;
-    </footer>
+  <hr>
+
+  <footer>
+    <section id="Copyrights-And-Contact-Info">
+      <h2>Contact info</h2>
+      <p>To be announced...</p>
+    </section>
+    &COPY;
+  </footer>
 </template>
 
 <script>
 import Burger from '../components/OneBurger.vue'
 import io from 'socket.io-client'
+import menu from '../assets/menu.json'
 
 const socket = io();
 
-function MenuItem(nm, kc, url, la, gl){
+/*function MenuItem(nm, kc, url, la, gl){
   this.name = nm;
   this.kCal = kc;
   this.url = url;
@@ -163,12 +107,12 @@ function MenuItem(nm, kc, url, la, gl){
   this.gluten = gl;
   }
 
-let allBurgers = [
-  {name:"The burger",kCal:300,url:"pic",lactose:true,gluten:false},
-  {name: "The BBBurgers Brother",kCal:400,url:"pic",lactose:true,gluten:true},
-  {name: "The Motherburger",kCal:500,url:"pic",lactose:false,gluten:false}];
+ let allBurgers = [
+  {name:"Burger 1",kCal:300,url:"img/burgare.jpeg",lactose:"Lactose-free",gluten:"Gluten-free"},
+  {name: "Burger 2",kCal:400,url:"img/burgare2.jpeg",lactose:"Contains lactose",gluten:"Gluten-free"},
+  {name: "Burger 3",kCal:500,url:"img/burgare3.jpeg",lactose:"Contains lactose",gluten:"Contains gluten"}];
 
-console.log(allBurgers);
+console.log(allBurgers);*/
 
 export default {
   name: 'HomeView',
@@ -177,25 +121,46 @@ export default {
   },
   data: function () {
     return {
-      burgers: allBurgers
+      burgers: menu
     }
   },
   methods: {
-    getOrderNumber: function () {
-      return Math.floor(Math.random()*100000);
+    /*getOrderNumber: function () {
+      return Math.floor(Math.random() * 100000);
     },
     addOrder: function (event) {
-      var offset = {x: event.currentTarget.getBoundingClientRect().left,
-                    y: event.currentTarget.getBoundingClientRect().top};
-      socket.emit("addOrder", { orderId: this.getOrderNumber(),
-                                details: { x: event.clientX - 10 - offset.x,
-                                           y: event.clientY - 10 - offset.y },
-                                orderItems: ["Beans", "Curry"]
-                              }
-                 );
-    }
+      var offset = {
+        x: event.currentTarget.getBoundingClientRect().left,
+        y: event.currentTarget.getBoundingClientRect().top
+      };
+      socket.emit("addOrder", {
+        orderId: this.getOrderNumber(),
+        details: {
+          x: event.clientX - 10 - offset.x,
+          y: event.clientY - 10 - offset.y
+        },
+        orderItems: ["Alicia", "Är bäst"]
+      }
+      );
+    },*/
+    markDone: function (event) {
+      var offset = {
+        x: event.currentTarget.getBoundingClientRect().left,
+        y: event.currentTarget.getBoundingClientRect().top
+      };
+      socket.emit("markDone", {
+        orderId: this.getOrderNumber(),
+        details: {
+          x: event.clientX - 10 - offset.x,
+          y: event.clientY - 10 - offset.y
+        },
+        orderItems: ["Vilhelm", "heter jag"]
+      }
+      );
+    },
   }
 }
+
 </script>
 
 <style>
@@ -204,64 +169,65 @@ export default {
 @import 'https://fonts.googleapis.com/css?family=Pacifico|Dosis';
 
 body {
-    font-family: arial, sans-serif;
-    font-size: 1em;
- }
-
- #Burger-selection {
-    background-color: black;
-    color: white;
-    padding: 20px;
- }
- 
- button {
-    background-color: rgba(0,0,0,0);
-    border:0;
- 
-}
-button[type=submit]:hover{
-    background-color:darkgray;
-    cursor:pointer;
+  font-family: arial, sans-serif;
+  font-size: 1em;
 }
 
-section[id=Burger-selection]{
-    margin:2em;
-    border: 2px dotted;
-    border-color: white;
+#Burger-selection {
+  background-color: black;
+  color: white;
+  padding: 20px;
 }
 
-#Burgerlist{
-    display:grid;
-    grid-template-columns: repeat(auto-fill,20em);
-    gap:2em;
+button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+
 }
 
-section[id=Customer-Information]{
-    margin:2em;
-    border: 2px dotted;
-    border-color: black;
-    padding:2em;
+button[type=submit]:hover {
+  background-color: darkgray;
+  cursor: pointer;
 }
 
-.Bilder{
-    width:300px;
-    height:200px;
+section[id=Burger-selection] {
+  margin: 2em;
+  border: 2px dotted;
+  border-color: white;
 }
 
-.allergy{
-    font-weight: bold;
+#Burgerlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 20em);
+  gap: 2em;
+}
+
+section[id=Customer-Information] {
+  margin: 2em;
+  border: 2px dotted;
+  border-color: black;
+  padding: 2em;
+}
+
+.Bilder {
+  width: 300px;
+  height: 200px;
+}
+
+.allergy {
+  font-weight: bold;
 }
 
 header {
-    background-image: url("../../public/img/header-image.jpeg");
-    height:7em;
-    background-size: cover;
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    margin:2em;
-    padding-top:1em;
-    font-size:1.5em;
-    text-align: center;
+  background-image: url("../../public/img/header-image.jpeg");
+  height: 7em;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  margin: 2em;
+  padding-top: 1em;
+  font-size: 1.5em;
+  text-align: center;
 }
 </style>
 

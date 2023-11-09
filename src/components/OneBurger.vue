@@ -1,27 +1,25 @@
 <template>
   <div>
     <article>
-          <h3>{{ burger.name }} {{ burger.kCal }}</h3>
-          <img class="Bilder" src="img/burgare.jpeg">
+      <h3>{{ burger.name }}</h3>
+      <img class="Bilder" v-bind:src="burger.url">
+
+      <h4>Information</h4>
+      <ol>
+        <li>Choose toppings</li>
+        <li>Choose side</li>
+        <li>Choose drink</li>
+      </ol>
+
+      <ul>
+        <li>{{ burger.kCal }} kCal</li>
+        <li>{{ burger.lactose }}</li>
+        <li>{{ burger.gluten }}</li>
+        
+      </ul>
 
 
-          <div id="BaltBurger-information">
-            <h4>Information</h4>
-            <ol>
-              <li>Choose toppings</li>
-              <li>Choose side</li>
-              <li>Choose drink</li>
-            </ol>
-
-            <ul>
-              <li><span class="allergy"> Gluten-free</span></li>
-              <li> 100% <span class="allergy"> Swedish Ingredients</span></li>
-              <li> May contain<span class="allergy"> nuts</span></li>
-              <dd>...ask the staff if you're unsure</dd>
-            </ul>
-
-          </div>
-        </article>
+    </article>
   </div>
 </template>
 
