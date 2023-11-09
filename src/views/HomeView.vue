@@ -68,11 +68,6 @@
         </form>
       </section>
     </section>
-   <!-- <button name="order-now" type="submit" v-on:click="addOrder">
-      <img src="img/ordernow4.png" width="150" height="100">
-
-    </button>*/ -->
-
     <button name="data-form" type="submit" v-on:click="markDone">
       <img src="img/ordernow4.png" width="150" height="100">
 
@@ -121,11 +116,21 @@ export default {
   },
   data: function () {
     return {
-      burgers: menu
+      burgers: menu,
+      fn: '',
+      em: '',
+      st: '',
+      ho: '',
+      slc: '',
+      gender: '',
+
     }
   },
   methods: {
-    /*getOrderNumber: function () {
+    markDone: function () {
+      console.log(this.fn, this.em, this.st, this.ho, this.gender)
+    },
+    getOrderNumber: function () {
       return Math.floor(Math.random() * 100000);
     },
     addOrder: function (event) {
@@ -133,7 +138,7 @@ export default {
         x: event.currentTarget.getBoundingClientRect().left,
         y: event.currentTarget.getBoundingClientRect().top
       };
-      socket.emit("addOrder", {
+      /*socket.emit("addOrder", {
         orderId: this.getOrderNumber(),
         details: {
           x: event.clientX - 10 - offset.x,
@@ -141,22 +146,7 @@ export default {
         },
         orderItems: ["Alicia", "Är bäst"]
       }
-      );
-    },*/
-    markDone: function (event) {
-      var offset = {
-        x: event.currentTarget.getBoundingClientRect().left,
-        y: event.currentTarget.getBoundingClientRect().top
-      };
-      socket.emit("markDone", {
-        orderId: this.getOrderNumber(),
-        details: {
-          x: event.clientX - 10 - offset.x,
-          y: event.clientY - 10 - offset.y
-        },
-        orderItems: ["Vilhelm", "heter jag"]
-      }
-      );
+      );*/
     },
   }
 }
