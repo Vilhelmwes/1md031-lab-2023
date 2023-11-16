@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Hello and Welcome to Vilhelms baltburgare</h1>
+    <h1>Hello and Welcome to Vilhelms Baltburgers</h1>
 
   </header>
 
@@ -14,7 +14,8 @@
 
       <div id="Burgerlist">
 
-        <Burger v-for="burger in burgers" v-bind:burger="burger" v-bind:key="burger.name" />
+        <Burger v-for="burger in burgers" v-bind:burger="burger" v-bind:key="burger.name"
+          v-on:orderedBurger="addToOrder($event)" />
       </div>
     </section>
 
@@ -23,7 +24,14 @@
       <h2>Customer information</h2>
       <p> Provide your delivery address and other necessary details for your order below:</p>
 
+      <div id="mapcontainer">
 
+        <div id="map" v-on:click="setLocation">
+          <div id="dots" v-bind:style="{ left: location.x + 'px', top: location.y + 'px' }" v-bind:key="'dots' + key">
+            <div>T</div>
+          </div>
+        </div>
+      </div>
       <section id="contact">
         <form>
           <p>
@@ -35,6 +43,11 @@
             <input type="text" id="email" v-model="em" required="required" placeholder="E-mail address">
           </p>
           <p>
+            <label for="phone">Phone</label><br>
+            <input type="text" id="phone" v-model="ph" required="required" placeholder="Phone number">
+          </p>
+          <!--
+            <p>
             <label for="street">Street</label><br>
             <input type="text" id="street" v-model="st" required="required" placeholder="Street name">
           </p>
@@ -42,6 +55,7 @@
             <label for="house">House</label><br>
             <input type="text" id="house" v-model="ho" required="required" placeholder="House number">
           </p>
+        -->
 
           <p>
             <label for="payment-method">Payment method</label><br>
@@ -85,6 +99,8 @@
     </section>
     &COPY;
   </footer>
+
+
 </template>
 
 <script>
@@ -119,16 +135,42 @@ export default {
       burgers: menu,
       fn: '',
       em: '',
+      ph: '',
       st: '',
       ho: '',
       slc: '',
       gender: '',
-
+      orderedBurger: {},
+      location: {
+        x: 0,
+        y: 0
+      }
     }
   },
   methods: {
     markDone: function () {
-      console.log(this.fn, this.em, this.st, this.ho, this.gender)
+      console.log(this.fn, this.em, this.ph, this.st, this.ho, this.gender, this.orderedBurger)
+      socket.emit("addOrder", {
+        orderId: this.getOrderNumber(),
+        details: {
+          x: this.location.x,
+          y: this.location.y
+        },
+        orderItems:
+          this.orderedBurger,
+        customerInformation: {
+          name: this.fn,
+          email: this.em,
+          phone: this.ph,
+          gender: this.gender,
+          select: this.slc,
+
+
+        }
+      }
+
+      );
+      console.log(this.location)
     },
     getOrderNumber: function () {
       return Math.floor(Math.random() * 100000);
@@ -138,17 +180,32 @@ export default {
         x: event.currentTarget.getBoundingClientRect().left,
         y: event.currentTarget.getBoundingClientRect().top
       };
-      /*socket.emit("addOrder", {
+      /* socket.emit("addOrder", {
         orderId: this.getOrderNumber(),
         details: {
           x: event.clientX - 10 - offset.x,
           y: event.clientY - 10 - offset.y
         },
-        orderItems: ["Alicia", "Är bäst"]
+        orderItems: ["Beans", "Curry"]
       }
-      );*/
+      );
+      this.location.x = event.clientX - 10 - event.currentTarget.getBoundingClientRect().left;
+      this.location.y = event.clientY - 10 - event.currentTarget.getBoundingClientRect().top;
+      */
     },
-  }
+
+    addToOrder: function (event) {
+      this.orderedBurger[event.name] = event.amount;
+    },
+
+    setLocation: function (event) {
+      this.location.x = event.clientX - 10 - event.currentTarget.getBoundingClientRect().left;
+      this.location.y = event.clientY - 10 - event.currentTarget.getBoundingClientRect().top;
+      console.log(this.location.x)
+      console.log(this.location.y)
+    }
+
+  },
 }
 
 </script>
@@ -164,7 +221,7 @@ body {
 }
 
 #Burger-selection {
-  background-color: black;
+  background-color: lightcoral;
   color: white;
   padding: 20px;
 }
@@ -217,6 +274,38 @@ header {
   margin: 2em;
   padding-top: 1em;
   font-size: 1.5em;
+  text-align: center;
+}
+
+#map {
+  background-image: url("../../public/img/polacks.jpg");
+  width: 1920px;
+  height: 1078px;
+}
+
+#mapcontainer {
+  overflow: scroll;
+  width: 100%;
+
+}
+
+#dots {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-repeat: no-repeat;
+  width: 1920px;
+  height: 1078px;
+  cursor: crosshair;
+}
+
+#dots div {
+  position: absolute;
+  background: black;
+  color: white;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
   text-align: center;
 }
 </style>

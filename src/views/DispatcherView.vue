@@ -2,17 +2,32 @@
     <div id="orders">
       <div id="orderList">
         <div v-for="(order, key) in orders" v-bind:key="'order'+key">
-          #{{ key }}: {{ order.orderItems.join(", ") }}
+          <ul>
+
+            <li>Order number #{{ key  }}</li><br>
+           <div v-for="(item,itemKey) in order.orderItems" :key="itemKey">
+          
+           {{ itemKey }}<br> Amount: {{ item }}<br><br></div>
+
+           Customer Information: <br><br>
+        <div>{{ order.customerInformation.name }}</div>
+        <div>{{ order.customerInformation.email }}</div>
+        <div>{{ order.customerInformation.phone }}</div>
+        <div>{{ order.customerInformation.gender }}</div>
+        <div>{{ order.customerInformation.select }}</div>
+        </ul>
         </div>
         <button v-on:click="clearQueue">Clear Queue</button>
       </div>
       <div id="dots" v-bind:style="{ background: 'url(' + require('../../public/img/polacks.jpg')+ ')' }">
-          <div v-for="(order, key) in orders" v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}" v-bind:key="'dots' + key">
+          <div v-for="(order, key) in orders" v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}"
+          v-bind:key="'dots' + key">
             {{ key }}
           </div>
       </div>
     </div>
   </template>
+  
   <script>
   import io from 'socket.io-client'
   const socket = io();
@@ -65,4 +80,3 @@
     text-align: center;
   }
   </style>
-  

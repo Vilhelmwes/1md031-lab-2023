@@ -1,21 +1,21 @@
 [
     {
-      "name": "Burger 1",
+      "name": "The Baltburger",
       "kCal": 300,
-      "lactose": true,
+      "lactose": true, 
       "gluten": true,
-      "img": "img/burgare.jpeg"
+      "url": "img/burgare.jpeg"
     },{
-        "name": "Burger 2",
+        "name": "The Baltburger's Brother",
         "kCal": 400,
         "lactose": false,
-        "gluten": false,
-        "img": "img/burgare2.jpeg"
+        "gluten": true,
+        "url": "img/burgare2.jpeg"
       },{
-        "name": "Burger 3",
+        "name": "The Motherburger",
         "kCal": 500,
-        "lactose": true,
+        "lactose": false,
         "gluten": false,
-        "img": "img/burgare3.jpeg"
+        "url": "img/burgare3.jpeg"
       }
   ]

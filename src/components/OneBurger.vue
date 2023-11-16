@@ -11,12 +11,22 @@
         <li>Choose drink</li>
       </ol>
 
-      <ul>
-        <li>{{ burger.kCal }} kCal</li>
-        <li>{{ burger.lactose }}</li>
-        <li>{{ burger.gluten }}</li>
+      <ul>{{ burger.kCal }} kCal</ul> 
+      <ul class="allergy">
         
+        <li v-if="!burger.lactose">Lactose-free!</li>
+        <li v-if="!burger.gluten">Gluten-free!</li>
       </ul>
+
+
+      
+
+      <div>
+        <p>Amount Ordered: {{ amountOrdered }}</p>
+        <button name="Increase" type="submit" v-on:click="increaseOrder">Increase</button>
+        <button name="Decrease" type="submit" v-on:click="decreaseOrder">Decrease</button>
+        <button name="addBurger" type="submit" v-on:click="addBurger">Add to order</button>
+      </div>
 
 
     </article>
@@ -28,8 +38,31 @@ export default {
   name: 'OneBurger',
   props: {
     burger: Object
+  },
+  data: function () {
+    return {
+      amountOrdered: 0,
+    };
+  },
+  methods: {
+    increaseOrder: function () {
+      this.amountOrdered += 1;
+    },
+    decreaseOrder: function () {
+      if (this.amountOrdered > 0) {
+        this.amountOrdered -= 1;
+      }
+    },
+    addBurger: function () {
+      this.$emit('orderedBurger', {
+        name: this.burger.name,
+        amount: this.amountOrdered
+      }
+      );
+
+    }
   }
-}
+};
 
 </script>
   
@@ -42,6 +75,15 @@ export default {
 
 .allergy {
   font-weight: bold;
+}
+
+button {
+  background-color: black;
+  color: white;
+  padding:0.5em;
+  margin:0.2em;
+  font-weight:bold;
+
 }
 </style>
   
